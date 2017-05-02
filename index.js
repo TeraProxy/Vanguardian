@@ -1,16 +1,18 @@
 module.exports = function Vanguardian(dispatch) {
 	let cid,
 		battleground,
-		onmount,
-		incontract,
 		inbattleground,
 		alive,
 		questid = 0,
-		timeout = null
+		timeout = null,
+		enabled = true
 		
-	// Magic
+	// ############# //
+	// ### Magic ### //
+	// ############# //
 		
 	dispatch.hook('S_COMPLETE_EVENT_MATCHING_QUEST', 1, event => {
+		if(!enabled) return
 		questid = event.id
 		if(questid != 0) {
 			timeout = setTimeout(CompleteQuest, 2000) // try to complete the quest after 2 seconds
@@ -20,14 +22,17 @@ module.exports = function Vanguardian(dispatch) {
 	
 	function CompleteQuest() {
 		clearTimeout(timeout)
-		if(alive && !onmount && !incontract && !inbattleground) { // if alive and not busy
+		if(!enabled) return
+		if(alive && !inbattleground) { // if alive and not busy
 			dispatch.toServer('C_COMPLETE_DAILY_EVENT', 1, { id: questid })
 			questid = 0
 		}
 		else timeout = setTimeout(CompleteQuest, 5000) // if dead or busy, retry to complete quest after 5 seconds
 	}
 	
-	// Checks
+	// ############## //
+	// ### Checks ### //
+	// ############## //
 		
 	dispatch.hook('S_LOGIN', 1, event => { 
 		({cid} = event) 
@@ -36,26 +41,46 @@ module.exports = function Vanguardian(dispatch) {
 	
 	dispatch.hook('S_BATTLE_FIELD_ENTRANCE_INFO', 1, event => { battleground = event.zone })
 	dispatch.hook('S_LOAD_TOPO', 1, event => {
-		onmount = false
-		incontract = false
 		inbattleground = event.zone == battleground
 	})
 	
 	dispatch.hook('S_SPAWN_ME', 1, event => { alive = event.alive })
 	dispatch.hook('S_CREATURE_LIFE', 1, event => {
-		if(event.target.equals(cid) && (alive != event.alive)) {
-			if(!alive) {
-				onmount = false
-				incontract = false
-			}
+		if(event.target.equals(cid)) {
+			alive = event.alive
 		}
 	})
-
-	dispatch.hook('S_MOUNT_VEHICLE', 1, event => { if(event.target.equals(cid)) onmount = true })
-	dispatch.hook('S_UNMOUNT_VEHICLE', 1, event => { if(event.target.equals(cid)) onmount = false })
-
-	dispatch.hook('S_REQUEST_CONTRACT', 1, event => { incontract = true })
-	dispatch.hook('S_ACCEPT_CONTRACT', 1, event => { incontract = false })
-	dispatch.hook('S_REJECT_CONTRACT', 1, event => { incontract = false })
-	dispatch.hook('S_CANCEL_CONTRACT', 1, event => { incontract = false })
+	
+	// ################# //
+	// ### Chat Hook ### //
+	// ################# //
+	
+	dispatch.hook('C_WHISPER', 1, (event) => {
+		if(event.target.toUpperCase() === "!vanguardian".toUpperCase()) {
+			if (/^<FONT>on?<\/FONT>$/i.test(event.message)) {
+				enabled = true
+				message('Vanguardian <font color="#00EE00">enabled</font>.')
+			}
+			else if (/^<FONT>off?<\/FONT>$/i.test(event.message)) {
+				enabled = false
+				message('Vanguardian <font color="#DC143C">disabled</font>.')
+			}
+			else message('Commands: "on" (enable Vanguardian),'
+								+ ' "off" (disable Vanguardian)'
+						)
+			return false
+		}
+	})
+	
+	function message(msg) {
+		dispatch.toClient('S_WHISPER', 1, {
+			player: cid,
+			unk1: 0,
+			gm: 0,
+			unk2: 0,
+			author: '!Vanguardian',
+			recipient: player,
+			message: msg
+		})
+	}
 }
