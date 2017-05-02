@@ -14,4 +14,4 @@ The following commands are supported:
 Any other input returns a summary of above commands in the game.
   
 ## Safety
-Whatever you send to "!Vanguardian" in game is intercepted client-side. The chat is NOT sent to the server.
+Whatever you send to "!Vanguardian" ingame is intercepted client-side. The chat is NOT sent to the server.
