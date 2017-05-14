@@ -8,10 +8,13 @@ While ingame, open a whisper chat session with "!Vanguardian" by typing "/w !van
 This serves as the script's command interface. 
 The following commands are supported:  
   
-* on - Enables the script  
+* on - Enables the script (default)  
 * off - Disables the script  
   
-Any other input returns a summary of above commands in the game.
+Any other input returns a summary of above commands in the game.  
+  
+Alternative commands in all other chats:  
+* !vg - Toggles between "on" and "off" state  
   
 ## Safety
 Whatever you send to "!Vanguardian" ingame is intercepted client-side. The chat is NOT sent to the server.

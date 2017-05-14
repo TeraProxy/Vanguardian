@@ -1,5 +1,6 @@
 module.exports = function Vanguardian(dispatch) {
 	let cid,
+		player = '',
 		battleground,
 		inbattleground,
 		alive,
@@ -35,7 +36,8 @@ module.exports = function Vanguardian(dispatch) {
 	// ############## //
 		
 	dispatch.hook('S_LOGIN', 1, event => { 
-		({cid} = event) 
+		({cid} = event)
+		player = event.name
 		questid = 0
 	})
 	
@@ -59,13 +61,14 @@ module.exports = function Vanguardian(dispatch) {
 		if(event.target.toUpperCase() === "!vanguardian".toUpperCase()) {
 			if (/^<FONT>on?<\/FONT>$/i.test(event.message)) {
 				enabled = true
-				message('Vanguardian <font color="#00EE00">enabled</font>.')
+				message('Vanguardian <font color="#56B4E9">enabled</font>.')
 			}
 			else if (/^<FONT>off?<\/FONT>$/i.test(event.message)) {
 				enabled = false
-				message('Vanguardian <font color="#DC143C">disabled</font>.')
+				message('Vanguardian <font color="#E69F00">disabled</font>.')
 			}
-			else message('Commands: "on" (enable Vanguardian),'
+			else message('Commands:<br>'
+								+ ' "on" (enable Vanguardian),<br>'
 								+ ' "off" (disable Vanguardian)'
 						)
 			return false
@@ -83,4 +86,20 @@ module.exports = function Vanguardian(dispatch) {
 			message: msg
 		})
 	}
+	
+	dispatch.hook('C_CHAT', 1, event => {
+		if(/^<FONT>!vg<\/FONT>$/i.test(event.message)) {
+			if(!enabled) {
+				enabled = true
+				message('Vanguardian <font color="#56B4E9">enabled</font>.')
+				console.log('Vanguardian enabled.')
+			}
+			else {
+				enabled = false
+				message('Vanguardian <font color="#E69F00">disabled</font>.')
+				console.log('Vanguardian disabled.')
+			}
+			return false
+		}
+	})
 }
