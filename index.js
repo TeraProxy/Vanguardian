@@ -6,6 +6,10 @@ module.exports = function Vanguardian(dispatch) {
 		alive,
 		questid = 0,
 		timeout = null,
+		timeoutdaily = null,
+		timeoutweekly = null,
+		daily = 0,
+		weekly = 0,
 		enabled = true
 		
 	// ############# //
@@ -21,6 +25,18 @@ module.exports = function Vanguardian(dispatch) {
 		return false
 	})
 	
+	dispatch.hook('S_AVAILABLE_EVENT_MATCHING_LIST', 1, event => {
+		if(!enabled) return
+		daily = event.unk5
+		weekly = event.unk6
+		if(daily == 3 || daily == 8) {
+			timeoutdaily = setTimeout(CompleteDaily, 3000)
+		}
+		if(weekly == 15) {
+			timeoutweekly = setTimeout(CompleteQuest, 3500)
+		}
+	})
+	
 	function CompleteQuest() {
 		clearTimeout(timeout)
 		if(!enabled) return
@@ -31,6 +47,24 @@ module.exports = function Vanguardian(dispatch) {
 		else timeout = setTimeout(CompleteQuest, 5000) // if dead or busy, retry to complete quest after 5 seconds
 	}
 	
+	function CompleteDaily() {
+		clearTimeout(timeoutdaily)
+		if(!enabled) return
+		if(alive && !inbattleground) { // if alive and not busy
+			dispatch.toServer('C_COMPLETE_EXTRA_EVENT', 1, { type: 1 })
+		}
+		else timeoutdaily = setTimeout(CompleteDaily, 5000) // if dead or busy, retry to complete quest after 5 seconds
+	}
+	
+	function CompleteWeekly() {
+		clearTimeout(timeoutweekly)
+		if(!enabled) return
+		if(alive && !inbattleground) { // if alive and not busy
+			dispatch.toServer('C_COMPLETE_EXTRA_EVENT', 1, { type: 0 })
+		}
+		else timeoutweekly = setTimeout(CompleteWeekly, 5000) // if dead or busy, retry to complete quest after 5 seconds
+	}
+	
 	// ############## //
 	// ### Checks ### //
 	// ############## //
@@ -39,6 +73,11 @@ module.exports = function Vanguardian(dispatch) {
 		({cid} = event)
 		player = event.name
 		questid = 0
+		daily = 0
+		weekly = 0
+		timeout = null
+		timeoutdaily = null
+		timeoutweekly = null
 	})
 	
 	dispatch.hook('S_BATTLE_FIELD_ENTRANCE_INFO', 1, event => { battleground = event.zone })
