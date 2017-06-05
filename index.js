@@ -42,6 +42,8 @@ module.exports = function Vanguardian(dispatch) {
 		if(!enabled) return
 		if(alive && !inbattleground) { // if alive and not busy
 			dispatch.toServer('C_COMPLETE_DAILY_EVENT', 1, { id: questid })
+			dispatch.toServer('C_COMPLETE_EXTRA_EVENT', 1, {type: 1})
+			dispatch.toServer('C_COMPLETE_EXTRA_EVENT', 1, {type: 0})
 			questid = 0
 		}
 		else timeout = setTimeout(CompleteQuest, 5000) // if dead or busy, retry to complete quest after 5 seconds
