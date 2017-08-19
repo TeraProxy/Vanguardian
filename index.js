@@ -30,6 +30,7 @@ module.exports = function Vanguardian(dispatch) {
 	dispatch.hook('S_COMPLETE_EVENT_MATCHING_QUEST', 1, event => {
 		questid = event.id
 		if(questid != 0) timeout = setTimeout(CompleteQuest, 2000) // try to complete the quest after 2 seconds
+		return false
 	})
 	
 	dispatch.hook('S_AVAILABLE_EVENT_MATCHING_LIST', 1, event => {
