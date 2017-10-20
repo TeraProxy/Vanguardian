@@ -34,10 +34,26 @@ module.exports = function Vanguardian(dispatch) {
 	})
 	
 	dispatch.hook('S_AVAILABLE_EVENT_MATCHING_LIST', 1, event => {
-		daily = event.unk5
+		daily = event.unk4
 		weekly = event.unk6
 		if(daily == 3 || daily == 8) timeoutdaily = setTimeout(CompleteDaily, 3000)
-		if(weekly == 15) timeoutweekly = setTimeout(CompleteQuest, 3500)
+		if(weekly == 16) timeoutweekly = setTimeout(CompleteQuest, 3500)
+			
+		console.log('S_COMPLETE_EVENT_MATCHING_QUEST')
+		console.log('    unk1 ' + event.unk1)
+		console.log('    unk2 ' + event.unk2)
+		console.log('    unk3 ' + event.unk3)
+		console.log('    unk4 ' + event.unk4)
+		console.log('    unk5 ' + event.unk5)
+		console.log('    vanguardBadges ' + event.vanguardBadges)
+		console.log('    vanguardCredits ' + event.vanguardCredits)
+		console.log('    unk6 ' + event.unk6)
+		console.log('    unk7 ' + event.unk7)
+		console.log('    limitAll ' + event.limitAll)
+		console.log('    limitPvp ' + event.limitPvp)
+		console.log('    limitParty ' + event.limitParty)
+		console.log('    limitGeneral ' + event.limitGeneral)
+		console.log('    level ' + event.level)
 	})
 	
 	// ######################## //
