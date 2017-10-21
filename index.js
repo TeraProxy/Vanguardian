@@ -1,6 +1,9 @@
+// Version 1.2.1
 const Command = require('command')
 
 module.exports = function Vanguardian(dispatch) {
+	const command = Command(dispatch)
+	
 	let cid,
 		battleground,
 		inbattleground,
@@ -11,7 +14,8 @@ module.exports = function Vanguardian(dispatch) {
 		timeoutweekly = null,
 		daily = 0,
 		weekly = 0,
-		enabled = true
+		enabled = true,
+		questcompleted = false
 		
 	// ############# //
 	// ### Magic ### //
@@ -37,7 +41,11 @@ module.exports = function Vanguardian(dispatch) {
 		daily = event.unk4
 		weekly = event.unk6
 		if(daily == 3 || daily == 8) timeoutdaily = setTimeout(CompleteDaily, 3000)
-		if(weekly == 16) timeoutweekly = setTimeout(CompleteQuest, 3500)
+		if(weekly == 16) timeoutweekly = setTimeout(CompleteWeekly, 3500)
+		if(questcompleted && enabled) {
+			command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
+			questcompleted = false
+		}
 	})
 	
 	// ######################## //
@@ -47,6 +55,7 @@ module.exports = function Vanguardian(dispatch) {
 	function CompleteQuest() {
 		clearTimeout(timeout)
 		if(!enabled) return
+		questcompleted = true
 		if(alive && !inbattleground) { // if alive and not in a battleground
 			dispatch.toServer('C_COMPLETE_DAILY_EVENT', 1, { id: questid })
 			questid = 0
@@ -92,10 +101,18 @@ module.exports = function Vanguardian(dispatch) {
 	// ### Chat Hook ### //
 	// ################# //
 	
-	const command = Command(dispatch)
-	command.add('vg', () => {
-		enabled = !enabled
-		command.message('[Vanguardian] ' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'))
-		console.log('[Vanguardian] ' + (enabled ? 'enabled' : 'disabled'))
+	command.add('vg', (param) => {
+		if(param == null) {
+			enabled = !enabled
+			command.message('[Vanguardian] ' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'))
+			console.log('[Vanguardian] ' + (enabled ? 'enabled' : 'disabled'))
+		}
+		else if(param == "daily") {
+			command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
+		}
+		else command.message('Commands:<br>'
+							+ ' "vg" (enable/disable Infinity-Journal),<br>'
+							+ ' "vg daily" (Tells you how many Vanguard Requests you completed today")'
+			)
 	})
 }
