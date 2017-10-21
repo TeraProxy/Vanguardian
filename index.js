@@ -14,8 +14,7 @@ module.exports = function Vanguardian(dispatch) {
 		timeoutweekly = null,
 		daily = 0,
 		weekly = 0,
-		enabled = true,
-		questcompleted = false
+		enabled = true
 		
 	// ############# //
 	// ### Magic ### //
@@ -42,10 +41,6 @@ module.exports = function Vanguardian(dispatch) {
 		weekly = event.unk6
 		if(daily == 3 || daily == 8) timeoutdaily = setTimeout(CompleteDaily, 3000)
 		if(weekly == 16) timeoutweekly = setTimeout(CompleteWeekly, 3500)
-		if(questcompleted && enabled) {
-			command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
-			questcompleted = false
-		}
 	})
 	
 	// ######################## //
@@ -55,10 +50,11 @@ module.exports = function Vanguardian(dispatch) {
 	function CompleteQuest() {
 		clearTimeout(timeout)
 		if(!enabled) return
-		questcompleted = true
 		if(alive && !inbattleground) { // if alive and not in a battleground
 			dispatch.toServer('C_COMPLETE_DAILY_EVENT', 1, { id: questid })
 			questid = 0
+			daily++
+			command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
 		}
 		else timeout = setTimeout(CompleteQuest, 5000) // if dead or busy, retry to complete quest after 5 seconds
 	}
