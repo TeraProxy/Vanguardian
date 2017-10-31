@@ -15,6 +15,8 @@ The following commands are supported:
 Whatever you send to the proxy chat in game is intercepted client-side. The chat is NOT sent to the server.  
   
 ## Changelog
+### 1.2.2
+* [*] Made completion of daily and weekly quests more reliable
 ### 1.2.1
 * [+] Added command to show the amount of completed daily Vanguard Requests
 * [*] Arsenal patch update

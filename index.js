@@ -1,4 +1,4 @@
-// Version 1.2.1
+// Version 1.2.2
 const Command = require('command')
 
 module.exports = function Vanguardian(dispatch) {
@@ -39,8 +39,6 @@ module.exports = function Vanguardian(dispatch) {
 	dispatch.hook('S_AVAILABLE_EVENT_MATCHING_LIST', 1, event => {
 		daily = event.unk4
 		weekly = event.unk6
-		if(daily == 3 || daily == 8) timeoutdaily = setTimeout(CompleteDaily, 3000)
-		if(weekly == 16) timeoutweekly = setTimeout(CompleteWeekly, 3500)
 	})
 	
 	// ######################## //
@@ -54,7 +52,10 @@ module.exports = function Vanguardian(dispatch) {
 			dispatch.toServer('C_COMPLETE_DAILY_EVENT', 1, { id: questid })
 			questid = 0
 			daily++
+			weekly++
 			command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
+			if(daily == 3 || daily == 8) timeoutdaily = setTimeout(CompleteDaily, 1000)
+			if(weekly == 16) timeoutweekly = setTimeout(CompleteWeekly, 1500)
 		}
 		else timeout = setTimeout(CompleteQuest, 5000) // if dead or busy, retry to complete quest after 5 seconds
 	}
