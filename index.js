@@ -1,4 +1,4 @@
-// Version 1.2.2
+// Version 1.2.3
 const Command = require('command')
 
 module.exports = function Vanguardian(dispatch) {
@@ -51,9 +51,12 @@ module.exports = function Vanguardian(dispatch) {
 		if(alive && !inbattleground) { // if alive and not in a battleground
 			dispatch.toServer('C_COMPLETE_DAILY_EVENT', 1, { id: questid })
 			questid = 0
-			daily++
-			weekly++
-			command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
+			if(daily < 16) {
+				daily++
+				weekly++
+				command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
+			}
+			else command.message('[Vanguardian] You have completed all ' + daily + ' Vanguard Requests today.')
 			if(daily == 3 || daily == 8) timeoutdaily = setTimeout(CompleteDaily, 1000)
 			if(weekly == 16) timeoutweekly = setTimeout(CompleteWeekly, 1500)
 		}
