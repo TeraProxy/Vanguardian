@@ -1,3 +1,6 @@
+##### :heavy_exclamation_mark: Elin Gunner Patch Info :heavy_exclamation_mark:
+Starting with this patch only a limited number of opcodes are mapped by default and most mods will not work when the update hits. This was necessary to prevent people from using exploits. Please be patient while the required opcodes for this module will be added.
+
 # Vanguardian
 A tera-proxy module that automatically finishes Vanguard Initiative quests on completion.  
 It finishes the quest 2 seconds after it got completed if you are able to finish it.  
