@@ -1,7 +1,6 @@
 ##### :heavy_exclamation_mark: Elin Gunner Patch Info :heavy_exclamation_mark:
-This module should be working with the latest https://github.com/TeraProxy/tera-data.  
-Please note that I did not test the opcodes for a long time yet but I'm quite positive they are correct.  
-If you do not mind helping me test, feel free to use my tera-data fork.  
+This module should be working with the latest https://github.com/meishuu/tera-data.  
+Please always keep your tera-data up-to-date.  
 
 # Vanguardian
 A tera-proxy module that automatically finishes Vanguard Initiative quests on completion.  
