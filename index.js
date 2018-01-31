@@ -111,7 +111,7 @@ module.exports = function Vanguardian(dispatch) {
 			command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
 		}
 		else command.message('Commands:<br>'
-							+ ' "vg" (enable/disable Infinity-Journal),<br>'
+							+ ' "vg" (enable/disable Vanguardian),<br>'
 							+ ' "vg daily" (Tells you how many Vanguard Requests you completed today")'
 			)
 	})
