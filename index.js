@@ -1,4 +1,5 @@
-// Version 1.2.3
+// Version 1.2.4
+
 const Command = require('command')
 
 module.exports = function Vanguardian(dispatch) {
@@ -20,8 +21,8 @@ module.exports = function Vanguardian(dispatch) {
 	// ### Magic ### //
 	// ############# //
 	
-	dispatch.hook('S_LOGIN', 1, event => { 
-		({cid} = event)
+	dispatch.hook('S_LOGIN', 10, event => { 
+		cid = event.gameId
 		questid = 0
 		daily = 0
 		weekly = 0
@@ -86,13 +87,13 @@ module.exports = function Vanguardian(dispatch) {
 	// ############## //
 		
 	dispatch.hook('S_BATTLE_FIELD_ENTRANCE_INFO', 1, event => { battleground = event.zone })
-	dispatch.hook('S_LOAD_TOPO', 1, event => {
+	dispatch.hook('S_LOAD_TOPO', 3, event => {
 		inbattleground = event.zone == battleground
 	})
 	
-	dispatch.hook('S_SPAWN_ME', 1, event => { alive = event.alive })
-	dispatch.hook('S_CREATURE_LIFE', 1, event => {
-		if(event.target.equals(cid)) {
+	dispatch.hook('S_SPAWN_ME', 2, event => { alive = event.alive })
+	dispatch.hook('S_CREATURE_LIFE', 2, event => {
+		if(event.gameId.equals(cid)) {
 			alive = event.alive
 		}
 	})
