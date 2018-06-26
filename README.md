@@ -34,6 +34,7 @@ Whatever you send to the proxy chat in game is intercepted client-side. The chat
 
 ## Changelog
 <details>
+
 ### 1.2.6
 * [*] Fixed a weird case-sensitivity issue
 * [*] More code cleanup
@@ -56,4 +57,5 @@ Whatever you send to the proxy chat in game is intercepted client-side. The chat
 * [+] Added automatic completion of daily and weekly bonus
 ### 1.0.0
 * [~] Initial Release
+
 </details>
