@@ -1,17 +1,16 @@
-// Version 1.2.5
+// Version 1.2.6
 
 'use strict'
 
 const Command = require('command'),
 	GameState = require('tera-game-state')
 
-module.exports = function Vanguardian(dispatch) {
+module.exports = function vanguardian(dispatch) {
 	const command = Command(dispatch),
 		game = GameState(dispatch)
 
 	let battleground = null,
 		inbattleground = false,
-		questid = 0,
 		timeout = null,
 		timeoutdaily = null,
 		timeoutweekly = null,
@@ -24,17 +23,12 @@ module.exports = function Vanguardian(dispatch) {
 	// ############# //
 
 	game.on('enter_game', () => {
-		questid = 0
-		daily = 0
-		weekly = 0
-		timeout = null
-		timeoutdaily = null
-		timeoutweekly = null
+		daily = weekly = 0
+		timeout = timeoutdaily = timeoutweekly = null
 	})
 
 	dispatch.hook('S_COMPLETE_EVENT_MATCHING_QUEST', 1, event => {
-		questid = event.id
-		if(questid != 0) timeout = setTimeout(CompleteQuest, 2000) // try to complete the quest after 2 seconds
+		timeout = setTimeout( () => { CompleteQuest(event.id) }, 2000) // try to complete the quest after 2 seconds
 		return false
 	})
 
@@ -57,38 +51,29 @@ module.exports = function Vanguardian(dispatch) {
 	// ### Functions ### //
 	// ################# //
 
-	function CompleteQuest() {
+	function CompleteQuest(id) {
 		clearTimeout(timeout)
 		if(!enabled) return
-		if(game.me.alive && !inbattleground) { // if alive and not in a battleground
-			dispatch.toServer('C_COMPLETE_DAILY_EVENT', 1, { id: questid })
-			questid = 0
+		if(game.me.alive && !inbattleground) {
+			dispatch.toServer('C_COMPLETE_DAILY_EVENT', 1, { id })
 			if(daily < 16) {
 				daily++
 				weekly++
 				command.message('[Vanguardian] You have completed ' + daily + ' Vanguard Requests today.')
 			}
 			else command.message('[Vanguardian] You have completed all ' + daily + ' Vanguard Requests today.')
-			if(daily == 3 || daily == 8) timeoutdaily = setTimeout(CompleteDaily, 1000)
-			if(weekly == 16) timeoutweekly = setTimeout(CompleteWeekly, 1500)
+			if(daily == 3 || daily == 8) timeoutdaily = setTimeout( () => { CompleteExtra(1) }, 1000)
+			if(weekly == 16) timeoutweekly = setTimeout( () => { CompleteExtra(0) }, 1500)
 		}
-		else timeout = setTimeout(CompleteQuest, 5000) // if dead or busy, retry to complete quest after 5 seconds
+		else timeout = setTimeout( () => { CompleteQuest(id) }, 5000) // if dead or in battleground, retry to complete quest after 5 seconds
 	}
 
-	function CompleteDaily() {
-		clearTimeout(timeoutdaily)
+	function CompleteExtra(type) {
+		clearTimeout(type == 1 ? timeoutdaily : timeoutweekly)
 		if(!enabled) return
-		if(game.me.alive && !inbattleground) // if alive and not in a battleground
-			dispatch.toServer('C_COMPLETE_EXTRA_EVENT', 1, { type: 1 })
-		else timeoutdaily = setTimeout(CompleteDaily, 5000) // if dead or busy, retry to complete quest after 5 seconds
-	}
-
-	function CompleteWeekly() {
-		clearTimeout(timeoutweekly)
-		if(!enabled) return
-		if(game.me.alive && !inbattleground) // if alive and not in a battleground
-			dispatch.toServer('C_COMPLETE_EXTRA_EVENT', 1, { type: 0 })
-		else timeoutweekly = setTimeout(CompleteWeekly, 5000) // if dead or busy, retry to complete quest after 5 seconds
+		if(game.me.alive && !inbattleground)
+			dispatch.toServer('C_COMPLETE_EXTRA_EVENT', 1, { type }) // 0 = weekly, 1 = daily
+		else timeoutextra = setTimeout( () => { CompleteExtra(type) }, 5000) // if dead or in battleground, retry to complete quest after 5 seconds
 	}
 
 	// ################ //

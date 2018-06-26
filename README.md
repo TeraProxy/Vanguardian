@@ -33,6 +33,10 @@ The following commands are supported:
 Whatever you send to the proxy chat in game is intercepted client-side. The chat is NOT sent to the server.
 
 ## Changelog
+<details>
+### 1.2.6
+* [*] Fixed a weird case-sensitivity issue
+* [*] More code cleanup
 ### 1.2.5
 * [+] Rewrote code to use Caali's "tera-game-state" module in order to reduce overhead
 * [+] Now supports auto-updating via Caali's tera-proxy
@@ -52,3 +56,4 @@ Whatever you send to the proxy chat in game is intercepted client-side. The chat
 * [+] Added automatic completion of daily and weekly bonus
 ### 1.0.0
 * [~] Initial Release
+</details>
