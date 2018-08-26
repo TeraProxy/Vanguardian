@@ -6,14 +6,6 @@ Should work on all regions as long as the opcodes are mapped but I personally on
 2) Extract the contents of the zip file into "\tera-proxy\bin\node_modules\"
 3) Done! (the module will auto-update when a new version is released)
 
-##### :heavy_exclamation_mark: Installation for PinkiePie's tera-proxy :heavy_exclamation_mark:
-1) Update your tera-data: https://github.com/meishuu/tera-data
-2) Download Vanguardian: https://github.com/TeraProxy/Vanguardian/archive/master.zip
-3) Download tera-game-state: https://github.com/hackerman-caali/tera-game-state/archive/master.zip
-4) Extract the contents of both zip files into "\tera-proxy\bin\node_modules\"
-5) Done!
-6) Check back here once in a while for updates
-
 If you enjoy my work and wish to support future development, feel free to drop me a small donation: [![Donate](https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=A3KBZUCSEQ5RJ&lc=US&item_name=TeraProxy&curency_code=USD&no_note=1&no_shipping=1&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
 
 # Vanguardian
@@ -35,6 +27,9 @@ Whatever you send to the proxy chat in game is intercepted client-side. The chat
 ## Changelog
 <details>
 
+### 1.2.7
+* [~] Code changes due to Caali's recent tera-proxy updates
+* [-] Removed support for Pinkie Pie's tera-proxy
 ### 1.2.6
 * [*] Fixed a weird case-sensitivity issue
 * [*] More code cleanup
