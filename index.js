@@ -1,4 +1,4 @@
-// Version 1.2.7
+// Version 1.2.8
 
 'use strict'
 
@@ -83,8 +83,8 @@ module.exports = function vanguardian(mod) {
 		}
 		else if(param == "daily")
 			mod.command.message('You have completed ' + daily + ' Vanguard Requests today.')
-		else mod.command.message('Commands:<br>'
-							+ ' "vg" (enable/disable Vanguardian),<br>'
+		else mod.command.message('Commands:\n'
+							+ ' "vg" (enable/disable Vanguardian),\n'
 							+ ' "vg daily" (Tells you how many Vanguard Requests you completed today")'
 		)
 	})
