@@ -1,8 +1,8 @@
 {
-    "disableAutoUpdate": false,
-    "options": {
-        "niceName": "Vanguardian"
-    },
-    "servers": ["https://raw.githubusercontent.com/TeraProxy/Vanguardian/master/"],
-    "supportUrl": "https://github.com/TeraProxy/Vanguardian/issues"
+	"disableAutoUpdate": false,
+	"options": {
+		"niceName": "VG"
+	},
+	"servers": ["https://raw.githubusercontent.com/TeraProxy/Vanguardian/master/"],
+	"supportUrl": "https://github.com/TeraProxy/Vanguardian/issues"
 }
