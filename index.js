@@ -74,7 +74,7 @@ module.exports = function Vanguardian(mod) {
 		if(param == null) {
 			enabled = !enabled
 			mod.command.message(niceName + 'Vanguardian ' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'))
-			console.log(niceName + 'Vanguardian ' + (enabled ? 'enabled' : 'disabled'))
+			console.log('Vanguardian ' + (enabled ? 'enabled' : 'disabled'))
 		}
 		else if(param == "daily") report()
 		else mod.command.message('Commands:\n'
