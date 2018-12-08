@@ -18,7 +18,6 @@ module.exports = function Vanguardian(mod) {
 	mod.game.on('enter_game', () => {
 		daily = weekly = 0
 		timeout = null
-		//mod.toServer('C_AVAILABLE_EVENT_MATCHING_LIST', 1, { unk: 1 })
 	})
 
 	mod.hook('S_COMPLETE_EVENT_MATCHING_QUEST', 1, event => {

@@ -1,8 +1,16 @@
 {
-	"disableAutoUpdate": false,
-	"options": {
-		"niceName": "VG"
-	},
-	"servers": ["https://raw.githubusercontent.com/TeraProxy/Vanguardian/master/"],
-	"supportUrl": "https://github.com/TeraProxy/Vanguardian/issues"
+    "disableAutoUpdate": false,
+    "name": "Vanguardian",
+    "author": "TeraProxy",
+    "description": "A tera-proxy module that automatically finishes Vanguard Initiative quests on completion and gives you a report about how many quests you already finished today.",
+    "version": "1.2.9",
+    "donationUrl": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=A3KBZUCSEQ5RJ",
+    "options": {
+        "niceName": "VG"
+    },
+    "servers": ["https://raw.githubusercontent.com/TeraProxy/Vanguardian/master/"],
+    "supportUrl": "https://github.com/TeraProxy/Vanguardian/issues",
+    "dependencies": {
+        "tera-game-state": "https://raw.githubusercontent.com/caali-hackerman/tera-game-state/master/module.json"
+    }
 }

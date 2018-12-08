@@ -1,9 +1,9 @@
 {
 	"files": {
 		"LICENSE": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
-		"README.md": "c38fcbadf8810f651bae859587ecd74cc98085a7436823d441a41edf83f00f26",
-		"index.js": "3c2ded24b992c0ce0f2a8bfd56e34fa5fd23328c07552858ce50cc1eaaea37c0",
-		"module.json": "2c2d24a3bbf933d0c074956c4e956a5b85e00f6b332b6338241d25e763f82dfb"
+		"README.md": "ed79a9e2953829a2b35576f76fda40f360a191852c5a8f0b5e8c5c8518df19e4",
+		"index.js": "d9035d36cf0413f2757b955d0214310de82e586e664212b258da3d7628923a30",
+		"module.json": "a9b6147a63295f0f6a101bd946c867c3da2a7c03b309cdf9de2454c16e9e4a93"
 	},
 	"defs": {
 		"C_COMPLETE_DAILY_EVENT": 1,
