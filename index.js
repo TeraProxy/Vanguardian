@@ -1,5 +1,3 @@
-// Version 1.2.9
-
 'use strict'
 
 module.exports = function Vanguardian(mod) {

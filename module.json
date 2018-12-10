@@ -10,6 +10,7 @@
     },
     "servers": ["https://raw.githubusercontent.com/TeraProxy/Vanguardian/master/"],
     "supportUrl": "https://github.com/TeraProxy/Vanguardian/issues",
+    "conflicts": ["auto-vanguard"],
     "dependencies": {
         "tera-game-state": "https://raw.githubusercontent.com/caali-hackerman/tera-game-state/master/module.json"
     }

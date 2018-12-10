@@ -2,8 +2,8 @@
 	"files": {
 		"LICENSE": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
 		"README.md": "ed79a9e2953829a2b35576f76fda40f360a191852c5a8f0b5e8c5c8518df19e4",
-		"index.js": "d9035d36cf0413f2757b955d0214310de82e586e664212b258da3d7628923a30",
-		"module.json": "a9b6147a63295f0f6a101bd946c867c3da2a7c03b309cdf9de2454c16e9e4a93"
+		"index.js": "8ddf29d28b0fea4ff6d64820b67bbbf87e3fa4fed858d40fc557f5e0ed70aaec",
+		"module.json": "c714f700c19ef12de73cb2f869214346eda604df8db3a76f9d66e245c19f9b95"
 	},
 	"defs": {
 		"C_COMPLETE_DAILY_EVENT": 1,
