@@ -3,7 +3,7 @@ Should work on all regions as long as the opcodes are mapped. Works on Caali's a
 
 ##### :heavy_exclamation_mark: Installation :heavy_exclamation_mark:
 1) Download Vanguardian: https://github.com/TeraProxy/Vanguardian/archive/master.zip
-2) Extract the contents of the zip file into "\tera-proxy\bin\node_modules\"
+2) Extract the contents of the zip file into "\tera-proxy\mods\"
 3) Done! (the module will auto-update on Caali's tera-proxy when a new version is released)
 
 Users of Pinkie's proxy also need to install tera-game-state: https://github.com/caali-hackerman/tera-game-state/archive/master.zip  
@@ -20,8 +20,8 @@ While in game, open a proxy chat session by typing "/proxy" or "/8" in chat and 
 This serves as the script's command interface.  
 The following commands are supported:  
   
-* vg - enable/disable Vanguardian  
-* vg daily - tells you how many Vanguard Requests you completed today
+* **vg** - enable/disable Vanguardian  
+* **vg daily** - tells you how many Vanguard Requests you completed today (need to open VG menu at least once before)
 
 ## Safety
 Whatever you send to the proxy chat in game is intercepted client-side. The chat is NOT sent to the server.
