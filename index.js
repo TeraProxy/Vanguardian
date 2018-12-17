@@ -30,7 +30,6 @@ module.exports = function Vanguardian(mod) {
 	mod.hookOnce('S_AVAILABLE_EVENT_MATCHING_LIST', 1, event => {
 		daily = event.unk4
 		weekly = event.unk6
-		return false
 	})
 
 	// ################# //
