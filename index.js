@@ -5,7 +5,6 @@ module.exports = function Vanguardian(mod) {
 	let timeout = null,
 		daily = 0,
 		weekly = 0,
-		enabled = true,
 		finishedQuests = [],
 		niceName = mod.proxyAuthor !== 'caali' ? '[VG] ' : ''
 
@@ -21,7 +20,7 @@ module.exports = function Vanguardian(mod) {
 	mod.hook('S_COMPLETE_EVENT_MATCHING_QUEST', 1, event => {
 		daily++
 		weekly++
-		if(!enabled) return
+		if(!mod.settings.enabled) return
 		finishedQuests.push(event.id)
 		timeout = setTimeout( () => { CompleteQuest() }, 2000) // try to complete the quest after 2 seconds
 		return false
@@ -38,7 +37,7 @@ module.exports = function Vanguardian(mod) {
 
 	function CompleteQuest() {
 		clearTimeout(timeout)
-		if(!enabled) return
+		if(!mod.settings.enabled) return
 		if(mod.game.me.alive && !mod.game.me.inBattleground) {
 			if(finishedQuests.length) {
 				for(let id of finishedQuests) {
@@ -54,7 +53,7 @@ module.exports = function Vanguardian(mod) {
 	}
 
 	function CompleteExtra(type) {
-		if(enabled) mod.toServer('C_COMPLETE_EXTRA_EVENT', 1, { type }) // 0 = weekly, 1 = daily
+		if(mod.settings.enabled) mod.toServer('C_COMPLETE_EXTRA_EVENT', 1, { type }) // 0 = weekly, 1 = daily
 	}
 
 	function report() {
@@ -68,9 +67,9 @@ module.exports = function Vanguardian(mod) {
 
 	mod.command.add('vg', (param) => {
 		if(param == null) {
-			enabled = !enabled
-			mod.command.message(niceName + 'Vanguardian ' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'))
-			console.log('Vanguardian ' + (enabled ? 'enabled' : 'disabled'))
+			mod.settings.enabled = !mod.settings.enabled
+			mod.command.message(niceName + 'Vanguardian ' + (mod.settings.enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'))
+			console.log('Vanguardian ' + (mod.settings.enabled ? 'enabled' : 'disabled'))
 		}
 		else if(param == "daily") report()
 		else mod.command.message('Commands:\n'

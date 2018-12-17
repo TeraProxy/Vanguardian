@@ -29,6 +29,8 @@ Whatever you send to the proxy chat in game is intercepted client-side. The chat
 ## Changelog
 <details>
 
+### 1.3.0
+* [+] Enabled/disabled state is now saved to a config file and reloaded the next time you login
 ### 1.2.9
 * [*] Fixed rare case where the amount of completed Vanguard Requests was incorrect
 * [~] Use tera-game-state for battleground info
